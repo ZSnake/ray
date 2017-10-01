@@ -1,0 +1,56 @@
+{
+  "name": "backend-trigrow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "gulp build && node dist/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Trigrow"
+  ],
+  "author": "Viktor Zavala",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.0",
+    "boom": "^5.2.0",
+    "co": "^4.6.0",
+    "hapi": "^16.5.2",
+    "hapi-async-handler": "^1.0.3",
+    "hapi-swagger": "^7.7.1",
+    "inert": "^4.2.1",
+    "joi": "^10.6.0",
+    "mysql2": "^1.4.1",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.7.2",
+    "vision": "^4.1.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.106.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
+    "del": "^3.0.0",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.3.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-copy": "^1.0.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-mocha": "^4.3.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-zip": "^4.0.0",
+    "run-sequence": "^2.1.0",
+    "sinon": "^3.2.1",
+    "sinon-chai": "^2.13.0"
+  }
+}
