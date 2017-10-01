@@ -1,9 +1,9 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('holidays', {
+  return sequelize.define('dishes', {
     id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER(),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
@@ -12,11 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    occurs: {
-      type: DataTypes.DATE,
+    description: {
+      type: DataTypes.STRING(100),
       allowNull: false
     }
   }, {
-    tableName: 'holidays'
+    tableName: 'dishes'
   });
 };

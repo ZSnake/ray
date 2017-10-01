@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
-import config from '../config/sequelizeConfig';
+import config from '../config/config';
 
 const basename = path.basename(module.filename);
 const db = {};
