@@ -19,12 +19,12 @@ deployment:
     prod:
         branch: master
         commands:
-            - ./heroku_deploy.sh <PROD_HEROKU_APP>:
+            - ./heroku_deploy.sh ray-backend:
               timeout: 300
     develop:
         branch: develop
         commands:
-            - ./heroku_deploy.sh <DEVELOP_HEROKU_APP>:
+            - ./heroku_deploy.sh ray-backend-dev:
               timeout: 300
 
 
