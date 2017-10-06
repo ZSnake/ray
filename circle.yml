@@ -1,0 +1,31 @@
+dependencies:
+    pre:
+        - npm install -g npm@5.3.0
+    override:
+        - npm config set registry http://registry.npmjs.org/
+        - npm install -g gulp
+        - npm install
+        - npm install -g heroku-cli
+
+test:
+  override:
+    - echo 'test'
+
+compile:
+    override:
+        - gulp build
+    post:
+        - git init
+        - heroku git:remote -a $HEROKU_APP_NAME
+
+deployment:
+    prod:
+        branch: master
+        commands:
+            - git subtree push --prefix dist heroku master
+    develop:
+        branch: develop
+        commands:
+            - gulp deploy-to-heroku
+
+
