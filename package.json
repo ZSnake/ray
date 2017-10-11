@@ -9,7 +9,7 @@
     "heroku-prebuild": "npm install & npm install -g gulp && npm install -g sequelize-cli && npm install --only=dev ",
     "heroku-postbuild": "gulp build",
     "start": "node dist/server",
-    "poststart": "cd dist/src && sequelize db:migrate"
+    "prestart": "cd dist/src && sequelize db:migrate"
   },
   "keywords": [
     "Trigrow"
