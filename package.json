@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "gulp build && node dist/server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install && npm install -g gulp && gulp build",
+    "heroku-prebuild": "npm install -g gulp",
+    "install": "npm install",
+    "heroku-postbuild": "gulp build",
     "start": "node dist/server"
   },
   "keywords": [

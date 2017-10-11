@@ -1,12 +1,3 @@
-dependencies:
-    pre:
-        - npm install -g npm@5.3.0
-    override:
-        - npm config set registry http://registry.npmjs.org/
-        - npm install -g gulp
-        - npm install
-        - npm install -g heroku-cli
-
 test:
   override:
     - echo 'test'
