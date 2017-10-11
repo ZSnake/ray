@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "gulp build && node dist/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install && npm install -g gulp && gulp build",
+    "start": "node dist/server"
   },
   "keywords": [
     "Trigrow"

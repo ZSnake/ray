@@ -11,21 +11,12 @@ test:
   override:
     - echo 'test'
 
-compile:
-    override:
-        - gulp build
-
 deployment:
     prod:
         branch: master
-        commands:
-            - ./heroku_deploy.sh ray-backend:
-              timeout: 300
+        heroku:
+          appname: ray-backend
     develop:
         branch: develop
-        commands:
-            - ./heroku_deploy.sh ray-backend-dev:
-              timeout: 300
-
-
-
+        heroku:
+          appname: ray-backend-dev

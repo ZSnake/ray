@@ -45,9 +45,3 @@ gulp.task('lint', () => {
 gulp.task('build', () => {
   runSequence(['lint', 'clean-src'], ['build-src', 'build-server', 'copy-package.json']);
 });
-
-gulp.task('zip-app', () => {
-	return gulp.src(['./dist/package.json', './dist/**/*.js'])
-		.pipe(zip(`${appName}-${environment}.zip`))
-		.pipe(gulp.dest('./dist'));
-});
