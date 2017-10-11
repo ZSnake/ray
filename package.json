@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "gulp build && node dist/server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-prebuild": "npm install & npm install -g gulp && npm install --only=dev",
-    "heroku-postbuild": "gulp build",
-    "start": "node dist/server"
+    "heroku-prebuild": "npm install & npm install -g gulp && npm install -g sequelize-cli && npm install --only=dev ",
+    "heroku-postbuild": "gulp build && sequelize db:migrate",
+    "start": "node dist/server",
   },
   "keywords": [
     "Trigrow"
