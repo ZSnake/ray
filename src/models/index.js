@@ -7,7 +7,16 @@ const basename = path.basename(module.filename);
 const db = {};
 
 const sequelize = process.env.DATABASE_URL ?
-new Sequelize(process.env.DATABASE_URL) |
+new Sequelize(process.env.DATABASE_URL, {
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000,
+  },
+  define: {
+    timestamps: false,
+  },
+}) |
 new Sequelize(config.database, config.username, config.password, {
   host: config.host,
   dialect: config.dialect,
