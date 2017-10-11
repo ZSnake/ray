@@ -1,3 +1,7 @@
+dependencies:
+    override:
+        - npm config set registry http://registry.npmjs.org/
+
 test:
   override:
     - echo 'test'
