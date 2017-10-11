@@ -5,7 +5,10 @@ import config from '../config/config';
 
 const basename = path.basename(module.filename);
 const db = {};
-const sequelize = new Sequelize(config.database, config.username, config.password, {
+
+const sequelize = process.env.DATABASE_URL ?
+new Sequelize(process.env.DATABASE_URL) |
+new Sequelize(config.database, config.username, config.password, {
   host: config.host,
   dialect: config.dialect,
 
