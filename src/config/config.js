@@ -1,7 +1,7 @@
 module.exports = {
-  username: process.env.DBUSER || 'postgres',
-  password: process.env.PASSWORD || 'admin',
+  username: process.env.PGUSER || 'postgres',
+  password: process.env.PGPASSWORD || 'admin',
   database: process.env.DATABASE || 'ray',
-  host: process.env.HOST || 'localhost',
+  host: process.env.DATABASE_URL || 'localhost',
   dialect: 'postgres',
 };
