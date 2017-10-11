@@ -11,7 +11,7 @@ import routes from './src/routes/routes';
 const server = new Hapi.Server();
 
 server.connection({
-  port: process.env.port || 8000,
+  port: process.env.PORT || 8000,
 });
 
 
