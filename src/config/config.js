@@ -1,7 +1,12 @@
 module.exports = {
-  username: process.env.PGUSER || 'postgres',
-  password: process.env.PGPASSWORD || 'admin',
-  database: process.env.DATABASE || 'ray',
-  host: process.env.HOST || 'localhost',
-  dialect: 'postgres',
+  development: {
+    username: 'postgres',
+    password: 'admin',
+    database: 'ray',
+    host: 'localhost',
+    dialect: 'postgres',
+  },
+  production: {
+    use_env_variable: 'DATABASE_URL',
+  },
 };

@@ -16,9 +16,9 @@ const sequelize = process.env.DATABASE_URL ?
     define: {
       timestamps: false,
     },
-  }) : new Sequelize(config.database, config.username, config.password, {
-    host: config.host,
-    dialect: config.dialect,
+  }) : new Sequelize(config.development.database, config.development.username, config.development.password, {
+    host: config.development.host,
+    dialect: config.development.dialect,
 
     pool: {
       max: 5,
