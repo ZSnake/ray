@@ -1,3 +1,6 @@
+dependencies:
+    pre:
+        - npm install -g npm@5.3.0
 
 test:
   override:
