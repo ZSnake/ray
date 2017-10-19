@@ -22,6 +22,8 @@ module.exports = [
           responses: {
             200: {
               description: 'Success',
+              id: Joi.number().required(),
+              email: Joi.string().email().required(),
               token: Joi.string().required(),
             },
           },

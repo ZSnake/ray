@@ -17,7 +17,14 @@ const login = async (request, reply) => {
     if (user) {
       const passwordMatch = await bcrypt.compare(request.payload.password, user.password);
       if (passwordMatch) {
-        return reply(jwtHelper.issueToken({ id: user.id, email: user.email }));
+        const token = jwtHelper.issueToken({ id: user.id, email: user.email });
+        return reply(
+          {
+            id: user.id,
+            email: user.email,
+            token,
+          },
+        );
       }
       return reply(boom.unauthorized('Wrong password'));
     }

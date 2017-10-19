@@ -1,15 +1,14 @@
+import 'babel-core/register';
+import 'babel-polyfill';
 import Hapi from 'hapi';
 import Inert from 'inert';
 import Vision from 'vision';
-import 'babel-core/register';
-import 'babel-polyfill';
+import CorsHeaders from 'hapi-cors-headers';
 import HapiAsyncHandler from 'hapi-async-handler';
 import Jwt from 'hapi-auth-jwt2';
 import jwtConfig from './src/config/jwtConfig.js';
 import authHelper from './src/helpers/authenticationHelper';
-
 import routes from './src/routes/routes';
-
 
 const server = new Hapi.Server();
 
@@ -17,6 +16,7 @@ server.connection({
   port: process.env.PORT || 8000,
 });
 
+server.ext('onPreResponse', CorsHeaders);
 
 server.register([Inert, Vision, HapiAsyncHandler, Jwt], (err) => {
   if (err) {
