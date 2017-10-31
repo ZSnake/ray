@@ -23,6 +23,7 @@ const login = async (request, reply) => {
             id: user.id,
             email: user.email,
             token,
+            type: user.type,
           },
         );
       }

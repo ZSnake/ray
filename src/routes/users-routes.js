@@ -11,6 +11,7 @@ module.exports = [
           email: Joi.string().email().required(),
           name: Joi.string().required(),
           password: Joi.string().max(20).min(6).required(),
+          type: Joi.string().allow(''),
         },
       },
       handler: {
@@ -27,6 +28,7 @@ module.exports = [
                 id: Joi.string().required(),
                 name: Joi.string().required(),
                 email: Joi.string().required(),
+                type: Joi.string().required(),
               }),
             },
           },

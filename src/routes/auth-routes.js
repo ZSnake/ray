@@ -25,6 +25,7 @@ module.exports = [
               id: Joi.number().required(),
               email: Joi.string().email().required(),
               token: Joi.string().required(),
+              type: Joi.string(),
             },
           },
         },

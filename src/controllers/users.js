@@ -11,6 +11,8 @@ const createUser = async (request, reply) => {
       password: hashedPassword,
       createdAt: Date.now(),
       updatedAt: Date.now(),
+      type: request.payload.type !== '' ? request.payload.type : 'customer',
+
     }, {
       raw: true,
     });
