@@ -1,6 +1,4 @@
-import co from 'co';
 import Joi from 'joi';
-
 import dishesController from '../controllers/dishes';
 
 module.exports = [
@@ -8,8 +6,9 @@ module.exports = [
     method: 'GET',
     path: '/dishes',
     config: {
+      auth: 'jwt',
       handler: {
-        async: co.wrap(dishesController.getAllDishes),
+        async: dishesController.getAllDishes,
       },
       description: 'Get all dishes',
       tags: ['api'],
@@ -35,6 +34,7 @@ module.exports = [
     method: 'POST',
     path: '/dish',
     config: {
+      auth: 'jwt',
       validate: {
         payload: {
           name: Joi.string().required(),
@@ -42,7 +42,7 @@ module.exports = [
         },
       },
       handler: {
-        async: co.wrap(dishesController.createDish),
+        async: dishesController.createDish,
       },
       description: 'Create new dish',
       tags: ['api'],
@@ -58,6 +58,33 @@ module.exports = [
                   description: Joi.string(),
                 }),
               }),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/dish/ingredients/{dishId}',
+    config: {
+      auth: 'jwt',
+      validate: {
+        payload: {
+          ingredientsIds: Joi.array().items(Joi.number()).allow(),
+        },
+      },
+      handler: {
+        async: dishesController.addIngredientsToDish,
+      },
+      description: 'Create new dish',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.array().items(Joi.number()).allow(),
             },
           },
         },

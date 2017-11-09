@@ -25,19 +25,11 @@ module.exports = [
               id: Joi.number().required(),
               email: Joi.string().email().required(),
               token: Joi.string().required(),
-              type: Joi.string(),
+              type: Joi.string().allow(),
             },
           },
         },
       },
-    },
-  },
-  {
-    method: 'GET',
-    path: '/test',
-    config: {
-      auth: 'jwt',
-      handler: (request, reply) => reply('authenticated'),
     },
   },
 ];

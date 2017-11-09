@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import Hapi from 'hapi';
 import Inert from 'inert';
 import Vision from 'vision';
+import HapiSwagger from 'hapi-swagger';
 import CorsHeaders from 'hapi-cors-headers';
 import HapiAsyncHandler from 'hapi-async-handler';
 import Jwt from 'hapi-auth-jwt2';
@@ -18,7 +19,7 @@ server.connection({
 
 server.ext('onPreResponse', CorsHeaders);
 
-server.register([Inert, Vision, HapiAsyncHandler, Jwt], (err) => {
+server.register([Inert, Vision, HapiAsyncHandler, Jwt, HapiSwagger], (err) => {
   if (err) {
     console.error('Error running application: ', err);
     return;

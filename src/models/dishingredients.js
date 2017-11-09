@@ -1,20 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var user = sequelize.define('user', {
-    email: {
-      type: DataTypes.STRING,
-      unique: true
-    },
-    password: DataTypes.STRING,
-    name: DataTypes.STRING,
-    type: DataTypes.STRING,
+  var dishIngredients = sequelize.define('dishIngredients', {
+    dishId: DataTypes.INTEGER,
+    ingredientId: DataTypes.INTEGER,
     createdAt: {
-      allowNull: false,
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     },
     updatedAt: {
-      allowNull: false,
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     }
@@ -25,5 +18,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return user;
+  return dishIngredients;
 };

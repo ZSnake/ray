@@ -17,7 +17,7 @@ const login = async (request, reply) => {
     if (user) {
       const passwordMatch = await bcrypt.compare(request.payload.password, user.password);
       if (passwordMatch) {
-        const token = jwtHelper.issueToken({ id: user.id, email: user.email });
+        const token = jwtHelper.issueToken({ id: user.id, email: user.email, type: user.type });
         return reply(
           {
             id: user.id,
