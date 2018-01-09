@@ -235,7 +235,7 @@ module.exports = [
   },
   {
     method: 'DELETE',
-    path: '/ingredient/{id}',
+    path: '/ingredient/{ingredientId}',
     config: {
       auth: 'jwt',
       handler: {
