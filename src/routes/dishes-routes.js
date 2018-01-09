@@ -77,7 +77,7 @@ module.exports = [
       handler: {
         async: dishesController.addIngredientsToDish,
       },
-      description: 'Create new dish',
+      description: 'Add ingredients to a dish from a list of IDs',
       tags: ['api'],
       plugins: {
         'hapi-swagger': {

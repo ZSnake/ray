@@ -35,8 +35,36 @@ const createIngredient = async (request, reply) => {
   }
 };
 
+const updateIngredient = async (request, reply) => {
+  try {
+    const updateStatus = await models.ingredient.update(request.payload, {
+      where: {
+        id: request.params.ingredientId,
+      },
+    });
+    return reply(updateStatus);
+  } catch (error) {
+    return reply(boom.badRequest(`Couldn't update ingredient: ${error}`));
+  }
+};
+
+const deleteIngredient = async (request, reply) => {
+  try {
+    const deleteStatus = await models.ingredient.delete({
+      where: {
+        id: request.params.ingredientId,
+      },
+    });
+    return reply(deleteStatus);
+  } catch (error) {
+    return reply(boom.badRequest(`Couldn't remove ingredient: ${error}`));
+  }
+};
+
 export default {
   getAllIngredients,
   getIngredientById,
   createIngredient,
+  updateIngredient,
+  deleteIngredient,
 };

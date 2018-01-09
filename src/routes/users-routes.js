@@ -44,7 +44,7 @@ module.exports = [
       handler: {
         async: usersController.getUsers,
       },
-      description: 'Create new user',
+      description: 'Get all users',
       tags: ['api'],
       plugins: {
         'hapi-swagger': {
