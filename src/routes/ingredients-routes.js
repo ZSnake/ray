@@ -169,7 +169,7 @@ module.exports = [
     method: 'PUT',
     path: '/ingredient/{ingredientId}',
     config: {
-      // auth: 'jwt',
+      auth: 'jwt',
       handler: {
         async: controller.updateIngredient,
       },
@@ -246,7 +246,7 @@ module.exports = [
           ingredientId: Joi.number().required(),
         },
       },
-      description: 'Get specific ingredient',
+      description: 'Delete specific ingredient',
       tags: ['api'],
       plugins: {
         'hapi-swagger': {

@@ -50,13 +50,14 @@ const updateIngredient = async (request, reply) => {
 
 const deleteIngredient = async (request, reply) => {
   try {
-    const deleteStatus = await models.ingredient.delete({
+    const deleteStatus = await models.ingredient.destroy({
       where: {
         id: request.params.ingredientId,
       },
     });
     return reply(deleteStatus);
   } catch (error) {
+    console.log(error);
     return reply(boom.badRequest(`Couldn't remove ingredient: ${error}`));
   }
 };
