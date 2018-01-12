@@ -73,7 +73,12 @@ const removeUser = async (request, reply) => {
         id: request.params.userId,
       },
     });
-    return reply(user);
+    const deleteStatus = await models.address.destroy({
+      where: {
+        userId: request.params.userId,
+      },
+    });
+    return reply({ deleteStatus, user });
   } catch (error) {
     return reply(boom.badRequest(`Could not remove user: ${error}`));
   }
