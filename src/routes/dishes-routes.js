@@ -6,7 +6,7 @@ module.exports = [
     method: 'GET',
     path: '/dishes',
     config: {
-      auth: 'jwt',
+      //  auth: 'jwt',
       handler: {
         async: dishesController.getAllDishes,
       },
