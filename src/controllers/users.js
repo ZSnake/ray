@@ -84,7 +84,7 @@ const removeUser = async (request, reply) => {
   }
 };
 
-const removeAddressFromUser = async (request, reply) => {
+const removeAddressesFromUser = async (request, reply) => {
   try {
     const deleteStatus = await models.address.destroy({
       where: {
@@ -97,11 +97,26 @@ const removeAddressFromUser = async (request, reply) => {
   }
 };
 
+const updateAdressFromUser = async (request, reply) => {
+  try {
+    const address = models.address.update(request.payload, {
+      where: {
+        id: request.params.id,
+        userId: request.params.userId,
+      },
+    });
+    return reply(address);
+  } catch (error) {
+    return reply(boom.badRequest(`Could not update address to user: ${error}`));
+  }
+};
+
 export default {
   createUser,
   addAddressToUser,
   getUserAddresses,
   getUsers,
   removeUser,
-  removeAddressFromUser,
+  removeAddressesFromUser,
+  updateAdressFromUser,
 };

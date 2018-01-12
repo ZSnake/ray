@@ -213,4 +213,54 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'PUT',
+    path: '/user/{userId}/{id}/address',
+    config: {
+      auth: 'jwt',
+      validate: {
+        params: {
+          id: Joi.number().required(),
+          userId: Joi.number().required(),
+        },
+        payload: {
+          colony: Joi.string().required(),
+          city: Joi.string().required(),
+          department: Joi.string().allow(),
+          phone: Joi.string().allow(),
+          celphone: Joi.string().allow(),
+          street: Joi.string().allow(),
+          block: Joi.string().allow(),
+          house: Joi.string().allow(),
+          reference: Joi.string().allow(),
+        },
+      },
+      handler: {
+        async: usersController.updateAdressFromUser,
+      },
+      description: 'Update address from user',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.object({
+                userId: Joi.number().required(),
+                colony: Joi.string().required(),
+                city: Joi.string().required(),
+                department: Joi.string().allow(),
+                phone: Joi.string().allow(),
+                celphone: Joi.string().allow(),
+                street: Joi.string().allow(),
+                block: Joi.string().allow(),
+                house: Joi.string().allow(),
+                reference: Joi.string().allow(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
 ];
