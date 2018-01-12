@@ -57,7 +57,6 @@ const deleteIngredient = async (request, reply) => {
     });
     return reply(deleteStatus);
   } catch (error) {
-    console.log(error);
     return reply(boom.badRequest(`Couldn't remove ingredient: ${error}`));
   }
 };

@@ -91,4 +91,35 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'DELETE',
+    path: '/dish/{dishId}',
+    config: {
+      auth: 'jwt',
+      handler: {
+        async: dishesController.deleteDish,
+      },
+      validate: {
+        params: {
+          dishId: Joi.number().required(),
+        },
+      },
+      description: 'Delete specific dish',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.object({
+                id: Joi.string().required(),
+                name: Joi.string().allow(),
+                description: Joi.string().allow(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
 ];

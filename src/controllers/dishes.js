@@ -42,8 +42,27 @@ const addIngredientsToDish = async (request, reply) => {
   }
 };
 
+const deleteDish = async (request, reply) => {
+  try {
+    const deleteStatus1 = await models.dishIngredients.destroy({
+      where: {
+        dishId: request.params.dishId,
+      },
+    });
+    const deleteStatus2 = await models.dishes.destroy({
+      where: {
+        id: request.params.dishId,
+      },
+    });
+    return reply({ deleteStatus1, deleteStatus2 });
+  } catch (error) {
+    return reply(Boom.badRequest(`Couldn't remove dish: ${error}`));
+  }
+};
+
 export default {
   getAllDishes,
   createDish,
   addIngredientsToDish,
+  deleteDish,
 };
