@@ -95,6 +95,19 @@ const updateIngredientsOnDish = async (request, reply) => {
   }
 };
 
+const getDishById = async (request, reply) => {
+  try {
+    const dish = await models.dishes.findOne({
+      where: {
+        id: request.params.dishId,
+      },
+    });
+    return reply(dish);
+  } catch (e) {
+    return reply(Boom.badRequest(`Can't fetch ingredient: ${e}`));
+  }
+};
+
 export default {
   getAllDishes,
   createDish,
@@ -102,4 +115,5 @@ export default {
   deleteDish,
   updateDish,
   updateIngredientsOnDish,
+  getDishById,
 };
