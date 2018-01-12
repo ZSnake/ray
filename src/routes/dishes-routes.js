@@ -70,6 +70,9 @@ module.exports = [
     config: {
       auth: 'jwt',
       validate: {
+        params: {
+          dishId: Joi.number().required(),
+        },
         payload: {
           ingredientsIds: Joi.array().items(Joi.number()).allow(),
         },
@@ -116,6 +119,73 @@ module.exports = [
                 name: Joi.string().allow(),
                 description: Joi.string().allow(),
               }),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/dish/{dishId}',
+    config: {
+      auth: 'jwt',
+      validate: {
+        params: {
+          dishId: Joi.number().required(),
+        },
+        payload: {
+          name: Joi.string().required(),
+          description: Joi.string(),
+        },
+      },
+      handler: {
+        async: dishesController.updateDish,
+      },
+      description: 'Update dish',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.array().items({
+                dataValues: Joi.object({
+                  id: Joi.string().required(),
+                  name: Joi.string().required(),
+                  description: Joi.string(),
+                }),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/dish/ingredients/change/{dishId}',
+    config: {
+      auth: 'jwt',
+      validate: {
+        params: {
+          dishId: Joi.number().required(),
+        },
+        payload: {
+          ingredientsIds: Joi.array().items(Joi.number()).allow(),
+        },
+      },
+      handler: {
+        async: dishesController.updateIngredientsOnDish,
+      },
+      description: 'Update ingredients on a dish from a list of IDs',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.array().items(Joi.number()).allow(),
             },
           },
         },

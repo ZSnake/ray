@@ -60,9 +60,46 @@ const deleteDish = async (request, reply) => {
   }
 };
 
+const updateDish = async (request, reply) => {
+  try {
+    const updateStatus = await models.dishes.update(request.payload, {
+      where: {
+        id: request.params.dishId,
+      },
+    });
+    return reply(updateStatus);
+  } catch (error) {
+    return reply(Boom.badRequest(`Couldn't update dish: ${error}`));
+  }
+};
+
+const updateIngredientsOnDish = async (request, reply) => {
+  try {
+    const recordsToCreate = request.payload.ingredientsIds.map((ingredientId) => {
+      const dishId = request.params.dishId;
+      return {
+        dishId,
+        ingredientId,
+      };
+    });
+    const deleteStatus = await models.dishIngredients.destroy({
+      where: {
+        dishId: request.params.dishId,
+      },
+    });
+    const dishIngredients =
+      await models.dishIngredients.bulkCreate(recordsToCreate, { returning: true });
+    return reply({ deleteStatus, dishIngredients });
+  } catch (error) {
+    return reply(Boom.badRequest(`Error updating ingredients on dish: ${error}`));
+  }
+};
+
 export default {
   getAllDishes,
   createDish,
   addIngredientsToDish,
   deleteDish,
+  updateDish,
+  updateIngredientsOnDish,
 };
