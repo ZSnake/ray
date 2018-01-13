@@ -73,9 +73,55 @@ const removeUser = async (request, reply) => {
         id: request.params.userId,
       },
     });
-    return reply(user);
+    const deleteStatus = await models.address.destroy({
+      where: {
+        userId: request.params.userId,
+      },
+    });
+    return reply({ deleteStatus, user });
   } catch (error) {
     return reply(boom.badRequest(`Could not remove user: ${error}`));
+  }
+};
+
+const removeAddressesFromUser = async (request, reply) => {
+  try {
+    const deleteStatus = await models.address.destroy({
+      where: {
+        userId: request.params.userId,
+      },
+    });
+    return reply(deleteStatus);
+  } catch (error) {
+    return reply(boom.badRequest(`Could not remove address from user: ${error}`));
+  }
+};
+
+const updateAdressFromUser = async (request, reply) => {
+  try {
+    const address = models.address.update(request.payload, {
+      where: {
+        id: request.params.id,
+        userId: request.params.userId,
+      },
+    });
+    return reply(address);
+  } catch (error) {
+    return reply(boom.badRequest(`Could not update address to user: ${error}`));
+  }
+};
+
+const removeAddressFromUser = async (request, reply) => {
+  try {
+    const deleteStatus = await models.address.destroy({
+      where: {
+        id: request.params.id,
+        userId: request.params.userId,
+      },
+    });
+    return reply(deleteStatus);
+  } catch (error) {
+    return reply(boom.badRequest(`Could not remove address from user: ${error}`));
   }
 };
 
@@ -85,4 +131,7 @@ export default {
   getUserAddresses,
   getUsers,
   removeUser,
+  removeAddressesFromUser,
+  updateAdressFromUser,
+  removeAddressFromUser,
 };
