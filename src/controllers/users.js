@@ -111,6 +111,20 @@ const updateAdressFromUser = async (request, reply) => {
   }
 };
 
+const removeAddressFromUser = async (request, reply) => {
+  try {
+    const deleteStatus = await models.address.destroy({
+      where: {
+        id: request.params.id,
+        userId: request.params.userId,
+      },
+    });
+    return reply(deleteStatus);
+  } catch (error) {
+    return reply(boom.badRequest(`Could not remove address from user: ${error}`));
+  }
+};
+
 export default {
   createUser,
   addAddressToUser,
@@ -119,4 +133,5 @@ export default {
   removeUser,
   removeAddressesFromUser,
   updateAdressFromUser,
+  removeAddressFromUser,
 };

@@ -177,7 +177,7 @@ module.exports = [
   },
   {
     method: 'DELETE',
-    path: '/user/{userId}/address',
+    path: '/user/{userId}/addresses',
     config: {
       auth: 'jwt',
       validate: {
@@ -186,9 +186,9 @@ module.exports = [
         },
       },
       handler: {
-        async: usersController.removeAddressFromUser,
+        async: usersController.removeAddressesFromUser,
       },
-      description: 'Remove address from user',
+      description: 'Remove addresses from user',
       tags: ['api'],
       plugins: {
         'hapi-swagger': {
@@ -239,6 +239,45 @@ module.exports = [
         async: usersController.updateAdressFromUser,
       },
       description: 'Update address from user',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.object({
+                userId: Joi.number().required(),
+                colony: Joi.string().required(),
+                city: Joi.string().required(),
+                department: Joi.string().allow(),
+                phone: Joi.string().allow(),
+                celphone: Joi.string().allow(),
+                street: Joi.string().allow(),
+                block: Joi.string().allow(),
+                house: Joi.string().allow(),
+                reference: Joi.string().allow(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    method: 'DELETE',
+    path: '/user/{userId}/{id}/address',
+    config: {
+      auth: 'jwt',
+      validate: {
+        params: {
+          id: Joi.number().required(),
+          userId: Joi.number().required(),
+        },
+      },
+      handler: {
+        async: usersController.removeAddressFromUser,
+      },
+      description: 'Remove address from user',
       tags: ['api'],
       plugins: {
         'hapi-swagger': {
