@@ -302,4 +302,76 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'PUT',
+    path: '/user/info/{id}',
+    config: {
+      auth: 'jwt',
+      validate: {
+        params: {
+          id: Joi.number().required(),
+        },
+        payload: {
+          email: Joi.string().email().required(),
+          name: Joi.string().required(),
+          type: Joi.string().allow(''),
+        },
+      },
+      handler: {
+        async: usersController.updateUser,
+      },
+      description: 'Update existing user',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              user: Joi.object({
+                id: Joi.string().required(),
+                name: Joi.string().required(),
+                email: Joi.string().required(),
+                type: Joi.string().required(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/user/password/{id}',
+    config: {
+      auth: 'jwt',
+      validate: {
+        params: {
+          id: Joi.number().required(),
+        },
+        payload: {
+          password: Joi.string().max(20).min(6).required(),
+        },
+      },
+      handler: {
+        async: usersController.updatePassword,
+      },
+      description: 'Update existing user password',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              user: Joi.object({
+                id: Joi.string().required(),
+                name: Joi.string().required(),
+                email: Joi.string().required(),
+                type: Joi.string().required(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
 ];

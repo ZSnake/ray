@@ -125,6 +125,43 @@ const removeAddressFromUser = async (request, reply) => {
   }
 };
 
+const updateUser = async (request, reply) => {
+  try {
+    const user = await models.user.update({
+      email: request.payload.email,
+      name: request.payload.name,
+      updatedAt: Date.now(),
+      type: request.payload.type !== '' ? request.payload.type : 'customer',
+    }, {
+      where: {
+        id: request.params.id,
+      },
+      raw: true,
+    });
+    return reply(user);
+  } catch (error) {
+    return reply(boom.badData(`Could not update user: ${error}`));
+  }
+};
+
+const updatePassword = async (request, reply) => {
+  try {
+    const hashedPassword = await bcrypt.hash(request.payload.password, 5);
+    const user = await models.user.update({
+      password: hashedPassword,
+      updatedAt: Date.now(),
+    }, {
+      where: {
+        id: request.params.id,
+      },
+      raw: true,
+    });
+    return reply(user);
+  } catch (error) {
+    return reply(boom.badData(`Could not update password: ${error}`));
+  }
+};
+
 export default {
   createUser,
   addAddressToUser,
@@ -134,4 +171,6 @@ export default {
   removeAddressesFromUser,
   updateAdressFromUser,
   removeAddressFromUser,
+  updateUser,
+  updatePassword,
 };
