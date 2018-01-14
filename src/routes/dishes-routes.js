@@ -192,4 +192,35 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'GET',
+    path: '/dish/{dishId}',
+    config: {
+      //  auth: 'jwt',
+      validate: {
+        params: {
+          dishId: Joi.number().required(),
+        },
+      },
+      handler: {
+        async: dishesController.getDishById,
+      },
+      description: 'Get all dishes',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.object({
+                id: Joi.string().required(),
+                name: Joi.string().required(),
+                description: Joi.string(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
 ];
