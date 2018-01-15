@@ -17,6 +17,18 @@ module.exports = {
       totalAmount: {
         type: Sequelize.REAL
       },
+      card: {
+        type: Sequelize.BOOLEAN
+      },
+      cash: {
+        type: Sequelize.BOOLEAN
+      },
+      additionalDetails: {
+        type: Sequelize.TEXT
+      },
+      done: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
