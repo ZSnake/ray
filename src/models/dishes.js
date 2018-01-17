@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
     description: {
       type: DataTypes.STRING(100),
       allowNull: false
-    }
+    },
+    price: DataTypes.REAL
   });
   return dishes;
 };
