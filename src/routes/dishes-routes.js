@@ -22,6 +22,7 @@ module.exports = [
                   id: Joi.string().required(),
                   name: Joi.string().required(),
                   description: Joi.string(),
+                  price: Joi.number(),
                 }),
               }),
             },
@@ -39,6 +40,7 @@ module.exports = [
         payload: {
           name: Joi.string().required(),
           description: Joi.string(),
+          price: Joi.number().required(),
         },
       },
       handler: {
@@ -56,6 +58,7 @@ module.exports = [
                   id: Joi.string().required(),
                   name: Joi.string().required(),
                   description: Joi.string(),
+                  price: Joi.number(),
                 }),
               }),
             },
@@ -118,6 +121,7 @@ module.exports = [
                 id: Joi.string().required(),
                 name: Joi.string().allow(),
                 description: Joi.string().allow(),
+                price: Joi.number(),
               }),
             },
           },
@@ -137,6 +141,7 @@ module.exports = [
         payload: {
           name: Joi.string().required(),
           description: Joi.string(),
+          price: Joi.number(),
         },
       },
       handler: {
@@ -154,6 +159,7 @@ module.exports = [
                   id: Joi.string().required(),
                   name: Joi.string().required(),
                   description: Joi.string(),
+                  price: Joi.number(),
                 }),
               }),
             },
@@ -216,6 +222,7 @@ module.exports = [
                 id: Joi.string().required(),
                 name: Joi.string().required(),
                 description: Joi.string(),
+                price: Joi.number(),
               }),
             },
           },
