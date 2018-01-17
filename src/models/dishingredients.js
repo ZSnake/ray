@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var dishIngredients = sequelize.define('dishIngredients', {
     dishId: DataTypes.INTEGER,
     ingredientId: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER,
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
