@@ -27,11 +27,14 @@ const createDish = async (request, reply) => {
 
 const addIngredientsToDish = async (request, reply) => {
   try {
-    const recordsToCreate = request.payload.ingredientsIds.map((ingredientId) => {
+    const recordsToCreate = request.payload.ingredients.map((ingredients) => {
+      const ingredientId = ingredients.ingredientId;
       const dishId = request.params.dishId;
+      const amount = ingredients.amount;
       return {
         dishId,
         ingredientId,
+        amount,
       };
     });
     const dishIngredients =

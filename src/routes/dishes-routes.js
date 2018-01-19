@@ -77,7 +77,10 @@ module.exports = [
           dishId: Joi.number().required(),
         },
         payload: {
-          ingredientsIds: Joi.array().items(Joi.number()).allow(),
+          ingredients: Joi.array().items(Joi.object({
+            ingredientId: Joi.number().required(),
+            amount: Joi.number().required(),
+          })).allow(),
         },
       },
       handler: {
@@ -90,7 +93,14 @@ module.exports = [
           responses: {
             200: {
               description: 'Success',
-              schema: Joi.array().items(Joi.number()).allow(),
+              schema: Joi.array().items({
+                dataValues: Joi.object({
+                  ingredients: Joi.array().items(Joi.object({
+                    ingredientId: Joi.number().required(),
+                    amount: Joi.number().required(),
+                  })).allow(),
+                }),
+              }),
             },
           },
         },
@@ -178,7 +188,10 @@ module.exports = [
           dishId: Joi.number().required(),
         },
         payload: {
-          ingredientsIds: Joi.array().items(Joi.number()).allow(),
+          ingredients: Joi.array().items(Joi.object({
+            ingredientId: Joi.number().required(),
+            amount: Joi.number().required(),
+          })).allow(),
         },
       },
       handler: {
@@ -191,7 +204,14 @@ module.exports = [
           responses: {
             200: {
               description: 'Success',
-              schema: Joi.array().items(Joi.number()).allow(),
+              schema: Joi.array().items({
+                dataValues: Joi.object({
+                  ingredients: Joi.array().items(Joi.object({
+                    ingredientId: Joi.number().required(),
+                    amount: Joi.number().required(),
+                  })).allow(),
+                }),
+              }),
             },
           },
         },
