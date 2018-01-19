@@ -78,11 +78,14 @@ const updateDish = async (request, reply) => {
 
 const updateIngredientsOnDish = async (request, reply) => {
   try {
-    const recordsToCreate = request.payload.ingredientsIds.map((ingredientId) => {
+    const recordsToCreate = request.payload.ingredients.map((ingredients) => {
+      const ingredientId = ingredients.ingredientId;
       const dishId = request.params.dishId;
+      const amount = ingredients.amount;
       return {
         dishId,
         ingredientId,
+        amount,
       };
     });
     const deleteStatus = await models.dishIngredients.destroy({
@@ -111,6 +114,21 @@ const getDishById = async (request, reply) => {
   }
 };
 
+const getDishIngredientAmount = async (request, reply) => {
+  try {
+    const amount = await models.dishIngredients.findOne({
+      attribute: 'amount',
+      where: {
+        dishId: request.params.dishId,
+        ingredientId: request.params.ingredientId,
+      },
+    });
+    return reply(amount);
+  } catch (e) {
+    return reply(Boom.badRequest(`Can't fetch amount: ${e}`));
+  }
+};
+
 export default {
   getAllDishes,
   createDish,
@@ -119,4 +137,5 @@ export default {
   updateDish,
   updateIngredientsOnDish,
   getDishById,
+  getDishIngredientAmount,
 };

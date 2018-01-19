@@ -250,4 +250,32 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'GET',
+    path: '/dish/amount/{dishId}/{ingredientId}',
+    config: {
+      //  auth: 'jwt',
+      validate: {
+        params: {
+          dishId: Joi.number().required(),
+          ingredientId: Joi.number().required(),
+        },
+      },
+      handler: {
+        async: dishesController.getDishIngredientAmount,
+      },
+      description: 'Get amount of specific ingredient in a dish.',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.number().required(),
+            },
+          },
+        },
+      },
+    },
+  },
 ];
