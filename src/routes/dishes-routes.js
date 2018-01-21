@@ -77,7 +77,10 @@ module.exports = [
           dishId: Joi.number().required(),
         },
         payload: {
-          ingredientsIds: Joi.array().items(Joi.number()).allow(),
+          ingredients: Joi.array().items(Joi.object({
+            ingredientId: Joi.number().required(),
+            amount: Joi.number().required(),
+          })).allow(),
         },
       },
       handler: {
@@ -90,7 +93,14 @@ module.exports = [
           responses: {
             200: {
               description: 'Success',
-              schema: Joi.array().items(Joi.number()).allow(),
+              schema: Joi.array().items({
+                dataValues: Joi.object({
+                  ingredients: Joi.array().items(Joi.object({
+                    ingredientId: Joi.number().required(),
+                    amount: Joi.number().required(),
+                  })).allow(),
+                }),
+              }),
             },
           },
         },
@@ -178,7 +188,10 @@ module.exports = [
           dishId: Joi.number().required(),
         },
         payload: {
-          ingredientsIds: Joi.array().items(Joi.number()).allow(),
+          ingredients: Joi.array().items(Joi.object({
+            ingredientId: Joi.number().required(),
+            amount: Joi.number().required(),
+          })).allow(),
         },
       },
       handler: {
@@ -191,7 +204,14 @@ module.exports = [
           responses: {
             200: {
               description: 'Success',
-              schema: Joi.array().items(Joi.number()).allow(),
+              schema: Joi.array().items({
+                dataValues: Joi.object({
+                  ingredients: Joi.array().items(Joi.object({
+                    ingredientId: Joi.number().required(),
+                    amount: Joi.number().required(),
+                  })).allow(),
+                }),
+              }),
             },
           },
         },
@@ -224,6 +244,34 @@ module.exports = [
                 description: Joi.string(),
                 price: Joi.number(),
               }),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/dish/amount/{dishId}/{ingredientId}',
+    config: {
+      //  auth: 'jwt',
+      validate: {
+        params: {
+          dishId: Joi.number().required(),
+          ingredientId: Joi.number().required(),
+        },
+      },
+      handler: {
+        async: dishesController.getDishIngredientAmount,
+      },
+      description: 'Get amount of specific ingredient in a dish.',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.number().required(),
             },
           },
         },
