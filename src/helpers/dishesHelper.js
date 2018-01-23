@@ -22,6 +22,30 @@ const getDishIngredients = async (dish) => {
   };
 };
 
+const getAmount = async (provDishId, ingredient) => {
+  const amount = await models.dishIngredients.findOne({
+    where: {
+      dishId: provDishId,
+      ingredientId: ingredient.id,
+    },
+  });
+  return amount.amount;
+};
+
+
+const getIngredientsWithAmount = async (dishId, ingredients) => {
+  const ingredientsWithAmount = await Promise.all(ingredients.map(async (ingredient) => {
+    const amount = await getAmount(dishId, ingredient);
+    return {
+      ...ingredient,
+      amount,
+    };
+  }));
+  return ingredientsWithAmount;
+};
+
 export default {
   getDishIngredients,
+  getIngredientsWithAmount,
+  getAmount,
 };

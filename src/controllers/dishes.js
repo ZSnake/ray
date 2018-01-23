@@ -129,6 +129,85 @@ const getDishIngredientAmount = async (request, reply) => {
   }
 };
 
+const getDishNutritionalFacts = async (request, reply) => {
+  try {
+    const dish = await models.dishes.findOne({
+      where: {
+        id: request.params.dishId,
+      },
+    });
+    const dishWithIngredients = await dishHelper.getDishIngredients(dish);
+    const ingredients = dishWithIngredients.ingredients;
+    const ingredientsWithAmount =
+      await dishHelper.getIngredientsWithAmount(request.params.dishId, ingredients);
+    let nutritionalFacts = {
+      calories: 0,
+      totalFat: 0,
+      saturatedFat: 0,
+      transFat: 0,
+      polyunsaturatedFat: 0,
+      monosaturatedFat: 0,
+      cholesterol: 0,
+      sodium: 0,
+      totalCarbohydrates: 0,
+      dietaryFiber: 0,
+      sugars: 0,
+      addedSugar: 0,
+      sugarAlcohol: 0,
+      protein: 0,
+      calcium: 0,
+      iron: 0,
+      vitaminD: 0,
+      potassium: 0,
+    };
+    console.log(ingredientsWithAmount);
+    ingredientsWithAmount.forEach((ingredient) => {
+      nutritionalFacts.calories +=
+        (ingredient.amount * ingredient.dataValues.calories);
+      nutritionalFacts.totalFat +=
+        (ingredient.amount * ingredient.dataValues.totalFat);
+      nutritionalFacts.saturatedFat +=
+        (ingredient.amount * ingredient.dataValues.saturatedFat);
+      nutritionalFacts.transFat +=
+        (ingredient.amount * ingredient.dataValues.transFat);
+      nutritionalFacts.polyunsaturatedFat +=
+        (ingredient.amount * ingredient.dataValues.polyunsaturatedFat);
+      nutritionalFacts.monosaturatedFat +=
+        (ingredient.amount * ingredient.dataValues.monosaturatedFat);
+      nutritionalFacts.cholesterol +=
+        (ingredient.amount * ingredient.dataValues.cholesterol);
+      nutritionalFacts.sodium +=
+        (ingredient.amount * ingredient.dataValues.sodium);
+      nutritionalFacts.totalCarbohydrates +=
+        (ingredient.amount * ingredient.dataValues.totalCarbohydrates);
+      nutritionalFacts.dietaryFiber +=
+        (ingredient.amount * ingredient.dataValues.dietaryFiber);
+      nutritionalFacts.sugars +=
+        (ingredient.amount * ingredient.dataValues.sugars);
+      nutritionalFacts.addedSugar +=
+        (ingredient.amount * ingredient.dataValues.addedSugar);
+      nutritionalFacts.sugarAlcohol +=
+        (ingredient.amount * ingredient.dataValues.sugarAlcohol);
+      nutritionalFacts.protein +=
+        (ingredient.amount * ingredient.dataValues.protein);
+      nutritionalFacts.calcium +=
+        (ingredient.amount * parseInt(ingredient.dataValues.calcium, 10));
+      nutritionalFacts.iron +=
+        (ingredient.amount * parseInt(ingredient.dataValues.iron, 10));
+      nutritionalFacts.vitaminD +=
+        (ingredient.amount * parseInt(ingredient.dataValues.vitaminD, 10));
+      nutritionalFacts.potassium +=
+        (ingredient.amount * parseInt(ingredient.dataValues.potassium, 10));
+    });
+    return reply({
+      dish,
+      nutritionalFacts,
+    });
+  } catch (e) {
+    return reply(Boom.badRequest(`Can't fetch nutritional facts: ${e}`));
+  }
+};
+
 export default {
   getAllDishes,
   createDish,
@@ -138,4 +217,5 @@ export default {
   updateIngredientsOnDish,
   getDishById,
   getDishIngredientAmount,
+  getDishNutritionalFacts,
 };

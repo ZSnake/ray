@@ -278,4 +278,48 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'GET',
+    path: '/dish/nutritionalFacts/{dishId}',
+    config: {
+      auth: 'jwt',
+      handler: {
+        async: dishesController.getDishNutritionalFacts,
+      },
+      description: 'Get dish nutritional facts.',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              schema: Joi.object({
+                id: Joi.string().required(),
+                name: Joi.string().allow(),
+                calories: Joi.number().allow(),
+                totalFat: Joi.number().allow(),
+                saturatedFat: Joi.number().allow(),
+                transFat: Joi.number().allow(),
+                polyunsaturatedFat: Joi.number().allow(),
+                monosaturatedFat: Joi.number().allow(),
+                cholesterol: Joi.number().allow(),
+                sodium: Joi.number().allow(),
+                totalCarbohydrates: Joi.number().allow(),
+                dietaryFiber: Joi.number().allow(),
+                sugars: Joi.number().allow(),
+                addedSugar: Joi.number().allow(),
+                sugarAlcohol: Joi.number().allow(),
+                protein: Joi.number().allow(),
+                calcium: Joi.number().allow(),
+                iron: Joi.number().allow(),
+                vitaminD: Joi.number().allow(),
+                potassium: Joi.number().allow(),
+                description: Joi.string().allow(),
+              }),
+            },
+          },
+        },
+      },
+    },
+  },
 ];
