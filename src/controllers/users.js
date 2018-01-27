@@ -38,7 +38,9 @@ const addAddressToUser = async (request, reply) => {
 const getUserAddresses = async (request, reply) => {
   try {
     const addresses = models.address.findAll({
-      userId: request.params.userId,
+      where: {
+        userId: request.params.userId,
+      },
     });
     return reply(addresses);
   } catch (error) {
