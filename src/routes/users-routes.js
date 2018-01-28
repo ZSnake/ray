@@ -127,6 +127,41 @@ module.exports = [
     },
   },
   {
+    method: 'GET',
+    path: '/user/addresses',
+    config: {
+      auth: 'jwt',
+      handler: {
+        async: usersController.getAddresses,
+      },
+      description: 'Get all addresses',
+      tags: ['api'],
+      plugins: {
+        'hapi-swagger': {
+          responses: {
+            200: {
+              description: 'Success',
+              addresses: Joi.array().items(
+                Joi.object({
+                  userId: Joi.number().required(),
+                  colony: Joi.string().required(),
+                  city: Joi.string().required(),
+                  department: Joi.string().allow(),
+                  phone: Joi.string().allow(),
+                  celphone: Joi.string().allow(),
+                  street: Joi.string().allow(),
+                  block: Joi.string().allow(),
+                  house: Joi.string().allow(),
+                  reference: Joi.string().allow(),
+                }),
+              ),
+            },
+          },
+        },
+      },
+    },
+  },
+  {
     method: 'PUT',
     path: '/user/{userId}/address',
     config: {

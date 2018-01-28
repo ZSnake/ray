@@ -93,11 +93,13 @@ const updateDishesInOrder = async (request, reply) => {
 const getOrderById = async (request, reply) => {
   try {
     const order = await models.orders.findOne({
+      raw: true,
       where: {
         id: request.params.orderId,
       },
     });
-    return reply(order);
+    const fullOrder = await ordersHelper.getOrderDetails(order);
+    return reply(fullOrder);
   } catch (e) {
     return reply(Boom.badRequest(`Can't fetch order: ${e}`));
   }

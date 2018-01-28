@@ -2,6 +2,11 @@ import Sequelize from 'sequelize';
 import models from '../models/';
 
 const getOrderDetails = async (order) => {
+  const address = await models.address.findOne({
+    where: {
+      id: order.addressId,
+    },
+  });
   const dishesIds = await models.orderDetails.findAll({
     attribute: 'dishId',
     where: {
@@ -18,6 +23,7 @@ const getOrderDetails = async (order) => {
   });
   return {
     ...order,
+    address,
     dishes,
   };
 };

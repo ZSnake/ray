@@ -48,6 +48,17 @@ const getUserAddresses = async (request, reply) => {
   }
 };
 
+const getAddresses = async (request, reply) => {
+  try {
+    const addresses = models.address.findAll({
+      raw: true,
+    });
+    return reply(addresses);
+  } catch (error) {
+    return reply(boom.badRequest(`Could not get addresses: ${error}`));
+  }
+};
+
 const getUsers = async (request, reply) => {
   try {
     const users = models.user.findAll({
@@ -168,6 +179,7 @@ export default {
   createUser,
   addAddressToUser,
   getUserAddresses,
+  getAddresses,
   getUsers,
   removeUser,
   removeAddressesFromUser,
