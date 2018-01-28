@@ -104,11 +104,13 @@ const updateIngredientsOnDish = async (request, reply) => {
 const getDishById = async (request, reply) => {
   try {
     const dish = await models.dishes.findOne({
+      raw: true,
       where: {
         id: request.params.dishId,
       },
     });
-    return reply(dish);
+    const fullDish = await dishHelper.getDishIngredients(dish);
+    return reply(fullDish);
   } catch (e) {
     return reply(Boom.badRequest(`Can't fetch ingredient: ${e}`));
   }
@@ -160,7 +162,6 @@ const getDishNutritionalFacts = async (request, reply) => {
       vitaminD: 0,
       potassium: 0,
     };
-    console.log(ingredientsWithAmount);
     ingredientsWithAmount.forEach((ingredient) => {
       nutritionalFacts.calories +=
         (ingredient.amount * ingredient.dataValues.calories);
