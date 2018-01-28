@@ -51,6 +51,7 @@ module.exports = [
           cash: Joi.boolean().required(),
           additionalDetails: Joi.string(),
           dishes: Joi.array().items(Joi.number()).allow(),
+          addressId: Joi.number().required(),
           done: false,
         },
       },
