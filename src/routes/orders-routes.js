@@ -45,14 +45,11 @@ module.exports = [
           userId: Joi.number().required(),
         },
         payload: {
-          dishCount: Joi.number().required(),
-          totalAmount: Joi.number().required(),
           card: Joi.boolean().required(),
           cash: Joi.boolean().required(),
           additionalDetails: Joi.string(),
           dishes: Joi.array().items(Joi.number()).allow(),
           addressId: Joi.number().required(),
-          done: false,
         },
       },
       handler: {

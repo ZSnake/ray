@@ -18,9 +18,14 @@ const getAllOrders = async (request, reply) => {
 
 const createOrder = async (request, reply) => {
   try {
+    const dishC = request.payload.dishes.length;
+    const totalA = await ordersHelper.getTotalAmount(request.payload.dishes);
     const createdOrder = await models.orders.create({
       ...request.payload,
+      done: false,
       userId: request.params.userId,
+      dishCount: dishC,
+      totalAmount: totalA,
     });
     const recordsToCreate = request.payload.dishes.map((dishId) => {
       const orderId = createdOrder.id;
