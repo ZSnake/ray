@@ -28,6 +28,22 @@ const getOrderDetails = async (order) => {
   };
 };
 
+const getTotalAmount = async (dishesIds) => {
+  const dishes = await models.dishes.findAll({
+    where: {
+      id: {
+        [Sequelize.Op.in]: dishesIds,
+      },
+    },
+  });
+  let totalAmount = 0;
+  dishes.forEach((dish) => {
+    totalAmount += dish.price;
+  });
+  return totalAmount;
+};
+
 export default {
   getOrderDetails,
+  getTotalAmount,
 };
